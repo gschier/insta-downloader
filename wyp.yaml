@@ -1,0 +1,6 @@
+scripts:
+  start:
+    help: run with user "gschier"
+    run: go run . gschier
+  vendor:
+    run: go mod vendor && go mod tidy
