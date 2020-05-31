@@ -1,6 +1,8 @@
 scripts:
   start:
-    help: run with user "gschier"
-    run: go run . gschier
+    name: dl
+    help: run with user "$IUSER"
+    run: go run ./cmd/instadl $IUSER
+    prefix: dl
   vendor:
     run: go mod vendor && go mod tidy
