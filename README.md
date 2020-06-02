@@ -2,7 +2,7 @@
 
 This is a simple command-line tool, written in Go, to download all images from an Instagram account.
 
-![Demo GIF](https://raw.githubusercontent.com/gschier/wyp/master/screenshots/demo.gif)
+![Demo GIF](https://raw.githubusercontent.com/gschier/insta-downloader/master/screenshots/demo.gif)
 
 ## Getting Started
 
