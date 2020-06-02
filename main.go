@@ -12,11 +12,12 @@ import (
 
 func main() {
 	if len(os.Args) < 2 {
-		fmt.Println("No username provided")
+		fmt.Println("Please specify output directory as first argument")
 		os.Exit(1)
 	}
 
-	username := os.Args[1]
+	dir := os.Args[1]
+	username := getUsername()
 	exportFileName := fmt.Sprintf(".goinsta.%s.json", username)
 	exportFile := filepath.Join(os.TempDir(), exportFileName)
 
@@ -24,6 +25,7 @@ func main() {
 	var initErr error
 
 	if internal.FileExists(exportFile) {
+		fmt.Println("Restored session info to:\n  ", exportFile)
 		insta, initErr = goinsta.Import(exportFile)
 	} else {
 		pass := getPass()
@@ -42,15 +44,12 @@ func main() {
 		fmt.Println("Failed to export config", err)
 		os.Exit(1)
 	}
-	fmt.Println("Stored session info to", exportFile)
+	fmt.Println("Persisted session info to:\n  ", exportFile)
 
-	imgDir := "images/" + insta.Account.Username
-	err = os.MkdirAll(imgDir, 0755)
-	if err != nil {
-		panic("Failed to create image dir " + err.Error())
-	}
+	imgDir := filepath.Join(dir, insta.Account.Username)
+	numDownloaded := internal.DownloadImages(insta, imgDir)
 
-	internal.DownloadImages(insta, imgDir)
+	fmt.Printf("Finished downloading %d images to %s\n", numDownloaded, imgDir)
 }
 
 func getPass() string {
@@ -67,4 +66,19 @@ func getPass() string {
 
 	password, _ := prompt.Run()
 	return password
+}
+
+func getUsername() string {
+	prompt := promptui.Prompt{
+		Label: "Username",
+		Validate: func(s string) error {
+			if s == "" {
+				return errors.New("required")
+			}
+			return nil
+		},
+	}
+
+	username, _ := prompt.Run()
+	return username
 }

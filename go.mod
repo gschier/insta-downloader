@@ -1,4 +1,4 @@
-module github.com/gschier/insta
+module github.com/gschier/insta-downloader
 
 go 1.14
 
