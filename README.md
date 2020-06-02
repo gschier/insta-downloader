@@ -2,10 +2,20 @@
 
 This is a simple command-line tool, written in Go, to download all images from an Instagram account.
 
-```bash
-# Install binary
-curl -sf https://gobinaries.com/gschier/insta-downloader | sh
+![Demo GIF](https://raw.githubusercontent.com/gschier/wyp/master/screenshots/demo.gif)
 
-# Run (will prompt for username and password)
-instadl
+## Getting Started
+
+Install `insta-downloader`:
+
+```bash
+curl -sf https://gobinaries.com/gschier/insta-downloader | sh
 ```
+
+Run it:
+
+```bash
+# You will be prompted for username/password
+insta-downloader ~/Downloads/instagram  
+```
+

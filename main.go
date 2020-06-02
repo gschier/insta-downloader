@@ -4,7 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/ahmdrz/goinsta/v2"
-	"github.com/gschier/insta/internal"
+	"github.com/gschier/insta-downloader/internal"
 	"github.com/manifoldco/promptui"
 	"os"
 	"path/filepath"
